@@ -3,6 +3,7 @@ return {
   'nvim-treesitter/nvim-treesitter',
   version = false,
   build = ":TSUpdate",
+  branch = "master",
   event = {'VeryLazy' },
   lazy = vim.fn.argc(-1) == 0,
   cmd = {
@@ -62,7 +63,5 @@ return {
       },
     },
   },
-  config = function(_, opts)
-    require("nvim-treesitter.configs").setup(opts)
-  end,
+  config = true,
 }
