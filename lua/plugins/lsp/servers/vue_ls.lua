@@ -8,15 +8,16 @@ return {
     vue_ls = {
       init_options = {
         typescript = {
-          tsdk = vim.fn.trim(vim.fn.system('npm root -g')) .. '/typescript/lib', -- Path to the global TypeScript SDK
+          tsdk = require('utils').npm_root() .. '/typescript/lib',
         },
         vue = {
           version = 2,
           hybridMode = true,
         },
       },
-      root_dir = function()
-        return vim.loop.os_homedir()
+      root_dir = function(fname)
+        local util = require('lspconfig.util')
+        return util.root_pattern('package.json', 'vue.config.js', '.git')(fname)
       end,
     },
   },

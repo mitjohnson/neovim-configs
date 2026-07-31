@@ -10,8 +10,7 @@ return {
         plugins = {
           {
             name = '@vue/typescript-plugin',
-            location = vim.fn.trim(vim.fn.system('npm root -g'))
-              .. '/@vue/typescript-plugin', -- Path to the global Vue/TypeScript plugin
+            location = require('utils').npm_root() .. '/@vue/typescript-plugin',
             languages = { 'javascript', 'typescript', 'vue' },
           },
         },

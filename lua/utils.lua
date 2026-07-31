@@ -9,6 +9,16 @@ local M = {}
 -- The location of global configuration files.
 M.configs_location = vim.fn.stdpath('config') .. '/configs/'
 
+local _npm_root = nil
+
+---@return string
+function M.npm_root()
+  if not _npm_root then
+    _npm_root = vim.fn.trim(vim.fn.system('npm root -g'))
+  end
+  return _npm_root
+end
+
 ---@param location string The directory path to start searching from.
 ---@param config_names string[] A list of configuration file names to search for.
 ---@returns boolean
