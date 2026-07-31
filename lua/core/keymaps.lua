@@ -21,7 +21,6 @@ return {
       { '<leader>tc', ':tabclose<CR>', desc = 'Close current tab' },
       { '<leader>to', ':tabnew<CR>', desc = 'Open a new tab' },
       { '<leader>rn', vim.lsp.buf.rename, desc = 'LSP: Smart rename' },
-      { '<leader>l', '<cmd>LspEslintFixAll<cr>', desc = 'LSP: Apply ESLint' },
       {
         'K',
         '<cmd>lua require("noice.lsp").hover()<cr>',

@@ -8,12 +8,20 @@ return {
     {
       '<leader>f',
       function()
-        require('conform').format()
-        if vim.fn.exists(':LspEslintFixAll') == 2 then
-          vim.cmd('LspEslintFixAll')
-        end
+        require('conform').format({}, function(err)
+          if not err and vim.fn.exists(':LspEslintFixAll') == 2 then
+            vim.cmd('LspEslintFixAll')
+          end
+        end)
       end,
       desc = 'Format buffer',
+    },
+    {
+      '<leader>fP',
+      function()
+        require('conform').format({ formatters = { 'prettier' } })
+      end,
+      desc = 'Format with Prettier',
     },
   },
   import = 'plugins.lsp.formatters',
@@ -61,12 +69,7 @@ return {
     require('conform').setup({
       formatters = formatters,
       formatters_by_ft = {
-        javascript = { 'prettier' },
-        javascriptreact = { 'prettier' },
-        typescript = { 'prettier' },
-        typescriptreact = { 'prettier' },
         json = { 'prettier' },
-        vue = { 'prettier' },
         yaml = { 'prettier' },
         html = { 'prettier' },
         css = { 'prettier' },
