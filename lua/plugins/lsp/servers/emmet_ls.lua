@@ -6,7 +6,7 @@ return {
   'neovim/nvim-lspconfig',
   opts = {
     emmet_language_server = {
-      filetyoes = {
+      filetypes = {
         'html',
         'css',
         'scss',
