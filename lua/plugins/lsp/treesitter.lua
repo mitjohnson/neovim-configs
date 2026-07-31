@@ -5,6 +5,9 @@ return {
   build = ":TSUpdate",
   branch = "master",
   event = {'VeryLazy' },
+  dependencies = {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+  },
   lazy = vim.fn.argc(-1) == 0,
   cmd = {
     'TSUpdate',
