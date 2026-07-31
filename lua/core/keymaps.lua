@@ -7,6 +7,7 @@ return {
     spec = {
       -- group labels
       { '<leader>g', group = 'Git' },
+      { '<leader>go', group = 'Octo' },
       { '<leader>f', group = 'Find' },
       { '<leader>p', group = 'DAP' },
       -- global Key maps

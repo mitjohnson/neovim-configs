@@ -17,6 +17,8 @@ return {
       { '<leader>fh', function() require('telescope.builtin').help_tags() end, desc = 'Help Tags' },
       { '<leader>fc', function() require('telescope.builtin').commands() end, desc = 'Commands' },
       { '<leader>fp', '<CMD>Telescope project<CR>', desc = 'Projects' },
+      { '<leader>fr', function() require('telescope.builtin').oldfiles() end, desc = 'Recent Files' },
+      { '<leader>fs', function() require('telescope.builtin').grep_string() end, desc = 'Grep Word Under Cursor' },
     },
     config = function()
       local telescope = require('telescope')
