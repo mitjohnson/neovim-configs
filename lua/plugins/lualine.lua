@@ -5,17 +5,24 @@ return {
     { 'folke/noice.nvim' },
   },
   opts = function(_, opts)
-    local trouble = require('trouble')
-    local symbols = trouble.statusline({
-      mode = 'lsp_document_symbols',
-      groups = {},
-      title = false,
-      filter = { range = true },
-      format = '{kind_icon}{symbol.name:Normal}',
-      -- The following line is needed to fix the background color
-      -- Set it to the lualine section you want to use
-      hl_group = 'lualine_c_normal',
-    })
+    -- Lazily initialize so trouble isn't force-loaded at startup.
+    local _symbols = nil
+    local function get_symbols()
+      if not _symbols then
+        local ok, trouble = pcall(require, 'trouble')
+        if ok then
+          _symbols = trouble.statusline({
+            mode = 'lsp_document_symbols',
+            groups = {},
+            title = false,
+            filter = { range = true },
+            format = '{kind_icon}{symbol.name:Normal}',
+            hl_group = 'lualine_c_normal',
+          })
+        end
+      end
+      return _symbols
+    end
 
     local macro_recording = {
       get = function()
@@ -45,8 +52,8 @@ return {
     })
 
     table.insert(opts.sections.lualine_c, {
-      symbols.get,
-      cond = symbols.has,
+      function() return get_symbols() and get_symbols().get() or '' end,
+      cond = function() return get_symbols() ~= nil and get_symbols().has() end,
     })
   end,
 }

@@ -20,7 +20,7 @@ return {
   },
   opts = {
     highlight = { enable = true },
-    indent = { enable = true },
+    indent = { enable = true, disable = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' } },
     ensure_installed = {
       "bash",
       "c",

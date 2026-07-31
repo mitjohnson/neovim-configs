@@ -2,7 +2,7 @@
 
 return {
   'tpope/vim-fugitive',
-  event = { 'BufReadPre', 'BufNewFile' },
+  cmd = { 'G', 'Git' },
   keys = {
     { '<leader>gf', '<cmd>G<CR>', desc = 'Git Fugitive' },
     { '<leader>gs', '<cmd>Git status<CR>', desc = 'Git Status' },

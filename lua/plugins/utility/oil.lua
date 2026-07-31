@@ -2,13 +2,11 @@
 
 return {
   'stevearc/oil.nvim',
-  ---@type oil.SetupOpts
-  opts = {
+  lazy = true,
+  keys = {
+    { '-', function() require('oil').open() end, desc = 'Open Oil' },
   },
-  dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
-  init = function()
-    vim.keymap.set('n', '-', function()
-      require('oil').open()
-    end, { desc = 'Open Oil' })
-  end
+  ---@type oil.SetupOpts
+  opts = {},
+  dependencies = { 'nvim-tree/nvim-web-devicons' },
 }
