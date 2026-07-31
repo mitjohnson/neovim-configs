@@ -5,6 +5,20 @@
 return {
   'neovim/nvim-lspconfig',
   opts = {
-    lua_ls = {},
+    lua_ls = {
+      settings = {
+        Lua = {
+          runtime = { version = 'LuaJIT' },
+          workspace = {
+            checkThirdParty = false,
+            library = { vim.env.VIMRUNTIME },
+          },
+          diagnostics = {
+            globals = { 'vim' },
+          },
+        },
+      },
+    },
   },
 }
+
