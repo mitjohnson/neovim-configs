@@ -38,6 +38,21 @@ return {
       vim.lsp.enable(server)
     end
 
+    vim.api.nvim_create_autocmd('LspAttach', {
+      callback = function(event)
+        local buf = event.buf
+        local map = function(keys, cmd, desc)
+          vim.keymap.set('n', keys, cmd, { buffer = buf, desc = desc })
+        end
+        map('K', '<cmd>lua require("noice.lsp").hover()<cr>', 'LSP: Hover')
+        map('gd', '<cmd>Telescope lsp_definitions<cr>', 'LSP: Go to Definition')
+        map('<leader>gt', '<cmd>Telescope lsp_type_definitions<cr>', 'LSP: Type Definitions')
+        map('<leader>rn', vim.lsp.buf.rename, 'LSP: Rename')
+        map('<leader>ca', vim.lsp.buf.code_action, 'LSP: Code Action')
+        map('<leader>D', '<cmd>Telescope diagnostics bufnr=0<cr>', 'LSP: Buffer Diagnostics')
+      end,
+    })
+
     vim.diagnostic.config({
       underline = true,
       update_in_insert = false,

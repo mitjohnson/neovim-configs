@@ -21,32 +21,6 @@ return {
       { '<leader>tF', ':tabfirst<CR>', desc = 'First tab' },
       { '<leader>tc', ':tabclose<CR>', desc = 'Close current tab' },
       { '<leader>to', ':tabnew<CR>', desc = 'Open a new tab' },
-      { '<leader>rn', vim.lsp.buf.rename, desc = 'LSP: Smart rename' },
-      {
-        'K',
-        '<cmd>lua require("noice.lsp").hover()<cr>',
-        desc = 'LSP: Show Definition',
-      },
-      {
-        'gd',
-        '<cmd>Telescope lsp_definitions<cr>',
-        desc = 'LSP: Show References',
-      },
-      {
-        '<leader>gt',
-        '<cmd>Telescope lsp_type_definitions<cr>',
-        desc = 'LSP: Show Type Definitions',
-      },
-      {
-        '<leader>ca',
-        vim.lsp.buf.code_action,
-        desc = 'LSP: Show available code actions',
-      },
-      {
-        '<leader>D',
-        '<cmd>Telescope diagnostics bufnr=0<cr>',
-        desc = 'LSP: Show buffer Diagnostics',
-      },
       { '<leader>rs', ':LspRestart<cr>', desc = 'Reset LSP' },
     },
   },
