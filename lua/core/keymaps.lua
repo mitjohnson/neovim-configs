@@ -10,6 +10,8 @@ return {
       { '<leader>go', group = 'Octo' },
       { '<leader>f', group = 'Find' },
       { '<leader>p', group = 'DAP' },
+      { '<leader>t', group = 'Tabs' },
+      { '<leader>T', group = 'Test' },
       -- global Key maps
       { '<C-h>', '<C-w><', desc = 'Decrease window width' },
       { '<C-l>', '<C-w>>', desc = 'Increase window width' },
