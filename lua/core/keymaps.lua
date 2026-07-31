@@ -5,6 +5,10 @@ return {
   ---@class wk.Opts
   opts = {
     spec = {
+      -- group labels
+      { '<leader>g', group = 'Git' },
+      { '<leader>f', group = 'Find' },
+      { '<leader>p', group = 'DAP' },
       -- global Key maps
       { '<C-h>', '<C-w><', desc = 'Decrease window width' },
       { '<C-l>', '<C-w>>', desc = 'Increase window width' },
@@ -13,7 +17,7 @@ return {
       { '<leader>tn', ':tabnext<CR>', desc = 'Next tab' },
       { '<leader>tp', ':tabprevious<CR>', desc = 'Previous tab' },
       { '<leader>tl', ':tablast<CR>', desc = 'Last tab' },
-      { '<leader>tf', ':tabfirst<CR>', desc = 'First tab' },
+      { '<leader>tF', ':tabfirst<CR>', desc = 'First tab' },
       { '<leader>tc', ':tabclose<CR>', desc = 'Close current tab' },
       { '<leader>to', ':tabnew<CR>', desc = 'Open a new tab' },
       { '<leader>rn', vim.lsp.buf.rename, desc = 'LSP: Smart rename' },

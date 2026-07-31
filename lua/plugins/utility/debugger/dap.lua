@@ -9,10 +9,20 @@ return {
       'nvim-neotest/nvim-nio',
       'mfussenegger/nvim-dap-python',
     },
+    keys = {
+      { '<c-p>', function() require('dap').toggle_breakpoint() end, desc = 'Toggle breakpoint' },
+      { '<leader>pc', function() require('dap').clear_breakpoints() end, desc = 'Clear all breakpoints' },
+      { '<leader>pl', function() require('dap').list_breakpoints() end, desc = 'List breakpoints' },
+      { '<leader><leader>d', function()
+        if vim.fn.filereadable('.vscode/launch.json') == 1 then
+          require('dap.ext.vscode').load_launchjs()
+        end
+        require('dap').continue()
+      end, desc = 'DAP Continue' },
+    },
     config = function()
       local dap = require('dap')
       local dapui = require('dapui')
-      local wk = require('which-key')
       local dap_python = require('dap-python')
 
       dap.defaults.fallback.exception_breakpoints = { 'uncaught' }
@@ -303,22 +313,6 @@ return {
         dapui.close()
       end
 
-      local continue = function()
-        -- support for vscode launch.json is partial.
-        -- not all configuration options and features supported
-        if vim.fn.filereadable('.vscode/launch.json') then
-          ---@diagnostic disable-next-line: deprecated
-          require('dap.ext.vscode').load_launchjs()
-        end
-        dap.continue()
-      end
-
-      wk.add({
-        { '<c-p>', dap.toggle_breakpoint, desc = 'Toggle breakpoint' },
-        { '<leader>pc', dap.clear_breakpoints, desc = 'Clear all breakpoints' },
-        { '<leader>pl', dap.list_breakpoints, desc = 'List breakpoints' },
-        { '<leader><leader>d', continue, desc = 'Continue' },
-      })
     end,
   },
 }

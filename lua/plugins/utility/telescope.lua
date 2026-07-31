@@ -8,22 +8,28 @@ return {
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
       'nvim-tree/nvim-web-devicons',
       'nvim-telescope/telescope-project.nvim',
+      'nvim-telescope/telescope-ui-select.nvim',
     },
-    lazy = true,
-    init = function()
-      local builtin = require('telescope.builtin');
-
-      require('telescope').load_extension('project')  
-
-      local wk = require('which-key')
-      wk.add({
-        { '<leader>ff', builtin.find_files, desc = 'Find Files' },
-        { '<leader>fg', builtin.live_grep, desc = 'Live Grep' },
-        { '<leader>fb', builtin.buffers, desc = 'Find Buffers' },
-        { '<leader>fh', builtin.help_tags, desc = 'Help Tags' },
-        { '<leader>fc', builtin.commands, desc = 'Commands' },
-        { '<leader>fp', '<CMD>Telescope project<CR>', desc = 'Projects' }
+    keys = {
+      { '<leader>ff', function() require('telescope.builtin').find_files() end, desc = 'Find Files' },
+      { '<leader>fg', function() require('telescope.builtin').live_grep() end, desc = 'Live Grep' },
+      { '<leader>fb', function() require('telescope.builtin').buffers() end, desc = 'Find Buffers' },
+      { '<leader>fh', function() require('telescope.builtin').help_tags() end, desc = 'Help Tags' },
+      { '<leader>fc', function() require('telescope.builtin').commands() end, desc = 'Commands' },
+      { '<leader>fp', '<CMD>Telescope project<CR>', desc = 'Projects' },
+    },
+    config = function()
+      local telescope = require('telescope')
+      telescope.setup({
+        extensions = {
+          ['ui-select'] = {
+            require('telescope.themes').get_dropdown({}),
+          },
+        },
       })
+      telescope.load_extension('fzf')
+      telescope.load_extension('project')
+      telescope.load_extension('ui-select')
     end,
   },
 }

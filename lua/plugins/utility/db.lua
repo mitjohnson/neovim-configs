@@ -16,13 +16,10 @@ return {
     'DBUIAddConnection',
     'DBUIFindBuffer',
   },
+  keys = {
+    { '<leader>db', '<cmd>DBUIToggle<CR>', desc = 'Toggle DBUI' },
+  },
   init = function()
-    local wk = require('which-key')
-
-    wk.add({
-      { '<leader>db', '<cmd>DBUIToggle<CR>', desc = 'Toggle DBUI' },
-    })
-
     vim.g.db_ui_use_nerd_fonts = 1
   end,
 }
