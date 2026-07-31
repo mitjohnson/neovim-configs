@@ -1,3 +1,5 @@
+local utils = require('utils')
+
 return {
   {
     'nvim-neotest/neotest',
@@ -31,18 +33,11 @@ return {
             jestCommand = 'npx jest --no-coverage',
             env = { NODE_ENV = 'test' },
             jestConfigFile = function(file)
-              local found = vim.fs.find('jest.config.js', { upward = true, path = vim.fn.fnamemodify(file, ':h') })
-              if #found > 0 then
-                return found[1]
-              end
-              return 'jest.config.js'
+              local root = utils.find_root(file, { 'jest.config.js' })
+              return root and (root .. '/jest.config.js') or 'jest.config.js'
             end,
             cwd = function(file)
-              local found = vim.fs.find('jest.config.js', { upward = true, path = vim.fn.fnamemodify(file, ':h') })
-              if #found > 0 then
-                return vim.fn.fnamemodify(found[1], ':h')
-              end
-              return vim.fn.getcwd()
+              return utils.find_root(file, { 'jest.config.js' }) or vim.fn.getcwd()
             end,
           }),
           require('neotest-mocha')({
@@ -64,11 +59,7 @@ return {
               return { '-c', table.concat(parts, ' ') }
             end,
             cwd = function(path)
-              local found = vim.fs.find('package.json', { upward = true, path = vim.fn.fnamemodify(path, ':h') })
-              if #found > 0 then
-                return vim.fn.fnamemodify(found[1], ':h')
-              end
-              return vim.fn.getcwd()
+              return utils.find_root(path, { 'package.json' }) or vim.fn.getcwd()
             end,
           }),
         },

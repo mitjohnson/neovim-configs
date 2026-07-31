@@ -8,18 +8,28 @@ return {
     {
       '<leader>f',
       function()
-        require('conform').format({}, function(err)
-          if not err and vim.fn.exists(':LspEslintFixAll') == 2 then
+        local conform = require('conform')
+        local function eslint()
+          if vim.fn.exists(':LspEslintFixAll') == 2 then
             vim.cmd('LspEslintFixAll')
           end
-        end)
+        end
+        if #conform.list_formatters(0) > 0 then
+          conform.format({}, function(err) if not err then eslint() end end)
+        else
+          eslint()
+        end
       end,
       desc = 'Format buffer',
     },
     {
       '<leader>fP',
       function()
-        require('conform').format({ formatters = { 'prettier' } })
+        require('conform').format({ formatters = { 'prettier' } }, function(err)
+          if not err and vim.fn.exists(':LspEslintFixAll') == 2 then
+            vim.cmd('LspEslintFixAll')
+          end
+        end)
       end,
       desc = 'Format with Prettier',
     },
@@ -32,25 +42,16 @@ return {
       formatters[formatter] = {
         prepend_args = function(_, ctx)
           if formatter_settings.config == true then
-            if
-              utils.has_local_config(
-                ctx.filename,
-                formatter_settings.config_names
-              )
-            then
-              vim.notify(
-                'Using local config for ' .. formatter .. ' in ' .. ctx.filename,
+            if utils.has_local_config(ctx.filename, formatter_settings.config_names) then
+              utils.notify_once(
+                'Using local config for ' .. formatter,
                 vim.log.levels.INFO,
                 { title = 'Conform' }
               )
               return {}
             else
-              vim.notify(
-                'Using global config for '
-                  .. formatter
-                  .. ' in '
-                  .. utils.configs_location
-                  .. formatter_settings.config_path,
+              utils.notify_once(
+                'Using global config for ' .. formatter,
                 vim.log.levels.INFO,
                 { title = 'Conform' }
               )
