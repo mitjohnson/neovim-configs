@@ -17,29 +17,22 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
--- code folding
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- code folding (managed by nvim-ufo)
 vim.opt.foldenable = true
 vim.opt.foldlevel = 99
-vim.opt.foldtext = 'v:lua.custom_fold()'
+vim.opt.foldlevelstart = 99
+vim.opt.foldtext = ''
 
 vim.opt.fillchars = {
   fold = ' ',
   foldopen = '',
   foldclose = '',
-  foldsep = ' ',
+  foldsep = '│',
 }
 
 vim.cmd([[
     highlight Folded guibg=NONE guifg=NONE
     highlight FoldColumn guibg=NONE
 ]])
-
-function _G.custom_fold()
-  local line = vim.fn.getline(vim.v.foldstart)
-  local num_lines = vim.v.foldend - vim.v.foldstart + 1
-  return string.format('%s... (%d lines)', line, num_lines)
-end
 
 vim.opt.laststatus = 3
