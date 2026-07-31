@@ -9,11 +9,17 @@ vim.opt.relativenumber = true
 vim.opt.scrolloff = 999
 
 vim.opt.spelllang = 'en_us'
-vim.opt.spell = true
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'markdown', 'text', 'gitcommit' },
+  callback = function()
+    vim.opt_local.spell = true
+  end,
+})
 
 -- code folding
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldenable = true
 vim.opt.foldlevel = 99
 vim.opt.foldtext = 'v:lua.custom_fold()'

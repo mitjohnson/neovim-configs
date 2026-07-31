@@ -6,7 +6,6 @@ return {
   opts = {
   },
   dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
-  lazy = false,
   init = function()
     vim.keymap.set('n', '-', function()
       require('oil').open()

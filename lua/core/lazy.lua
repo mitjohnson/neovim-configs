@@ -44,7 +44,7 @@ require('lazy').setup({
   -- color scheme that will be used when installing plugins.
   -- automatically check for plugin updates
   install = { colorscheme = { 'kanagawa-dragon' } },
-  checker = { enabled = true },
+  checker = { enabled = true, frequency = 86400 },
   ui = {
     border = 'rounded',
   },

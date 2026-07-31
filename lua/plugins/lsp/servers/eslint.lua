@@ -54,7 +54,7 @@ return {
           shortenToSingleLine = false,
         },
         quiet = false,
-        run = 'onType',
+        run = 'onSave',
         useESLintClass = false,
         validate = 'on',
         workingDirectory = {
