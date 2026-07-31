@@ -36,3 +36,4 @@ function _G.custom_fold()
   return string.format('%s... (%d lines)', line, num_lines)
 end
 
+vim.opt.laststatus = 3

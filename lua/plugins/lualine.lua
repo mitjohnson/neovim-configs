@@ -1,4 +1,3 @@
-vim.opt.laststatus = 3
 return {
   'nvim-lualine/lualine.nvim',
   dependencies = {
@@ -29,7 +28,7 @@ return {
       has = require('noice').api.statusline.mode.has --[[@as boolean]],
     }
 
-    opts.theme = { 'iceberg_dark' }
+    opts.theme = 'iceberg_dark'
 
     opts.sections = vim.tbl_deep_extend('force', {
       lualine_a = { 'mode' },
