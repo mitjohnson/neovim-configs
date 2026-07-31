@@ -38,17 +38,20 @@ return {
       vim.lsp.enable(server)
     end
 
-    opts.diagnostics = {
+    vim.diagnostic.config({
       underline = true,
       update_in_insert = false,
       virtual_text = true,
       severity_sort = true,
       signs = {
-        { name = 'DiagnosticSignError', text = '' },
-        { name = 'DiagnosticSignWarn', text = '' },
-        { name = 'DiagnosticSignHint', text = '' },
-        { name = 'DiagnosticSignInfo', text = '' },
+        text = {
+          [vim.diagnostic.severity.ERROR] = '',
+          [vim.diagnostic.severity.WARN] = '',
+          [vim.diagnostic.severity.HINT] = '',
+          [vim.diagnostic.severity.INFO] = '',
+        },
       },
-    }
+    })
+
   end,
 }
