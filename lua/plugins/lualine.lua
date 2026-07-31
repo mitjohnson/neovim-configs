@@ -17,15 +17,14 @@ return {
       hl_group = 'lualine_c_normal',
     })
 
-    ---@class MacroRecording
-    ---@field get string
-    ---@field has boolean
     local macro_recording = {
-      ---@diagnostic disable-next-line: deprecated
-      get = require('noice').api.statusline.mode.get --[[@as string]],
-
-      ---@diagnostic disable-next-line: deprecated
-      has = require('noice').api.statusline.mode.has --[[@as boolean]],
+      get = function()
+        local reg = vim.fn.reg_recording()
+        return reg ~= '' and ' @' .. reg or ''
+      end,
+      has = function()
+        return vim.fn.reg_recording() ~= ''
+      end,
     }
 
     opts.theme = 'iceberg_dark'
@@ -42,7 +41,7 @@ return {
     table.insert(opts.sections.lualine_x, {
       macro_recording.get,
       cond = macro_recording.has,
-      color = { fg = '#ff9e64' },
+      color = { fg = '#ff4444', gui = 'bold' },
     })
 
     table.insert(opts.sections.lualine_c, {
