@@ -93,11 +93,11 @@ return {
       msedge = pwa_alias('pwa-msedge'),
     },
     configurations = {
-      typescript = js_configs,
-      javascript = js_configs,
+      typescript      = js_configs,
+      javascript      = js_configs,
       typescriptreact = js_configs,
       javascriptreact = js_configs,
-      vue = js_configs,
+      vue             = js_configs,
     },
   },
 }

@@ -38,17 +38,17 @@ return {
       layouts = {
         {
           elements = {
-            { id = 'scopes', size = 0.25 },
+            { id = 'scopes',      size = 0.25 },
             { id = 'breakpoints', size = 0.25 },
-            { id = 'stacks', size = 0.25 },
-            { id = 'watches', size = 0.25 },
+            { id = 'stacks',      size = 0.25 },
+            { id = 'watches',     size = 0.25 },
           },
           position = 'right',
           size = 50,
         },
         {
           elements = {
-            { id = 'repl', size = 0.5 },
+            { id = 'repl',    size = 0.5 },
             { id = 'console', size = 0.5 },
           },
           position = 'bottom',
@@ -56,11 +56,11 @@ return {
         },
       },
       mappings = {
-        edit = 'e',
+        edit   = 'e',
         expand = { '<CR>', '<2-LeftMouse>' },
-        open = 'o',
+        open   = 'o',
         remove = 'd',
-        repl = 'r',
+        repl   = 'r',
         toggle = 't',
       },
       render = {
@@ -75,10 +75,10 @@ return {
       dapui.setup(opts)
 
       for action, operation in pairs({
-        attach = 'open',
-        launch = 'open',
+        attach           = 'open',
+        launch           = 'open',
         event_terminated = 'close',
-        event_exited = 'close',
+        event_exited     = 'close',
       }) do
         dap.listeners.before[action].dapui_config = function()
           dapui[operation]()
@@ -93,39 +93,16 @@ return {
       'mfussenegger/nvim-dap-python',
     },
     keys = {
-      {
-        '<c-p>',
-        function()
-          require('dap').toggle_breakpoint()
-        end,
-        desc = 'Toggle breakpoint',
-      },
-      {
-        '<leader>pc',
-        function()
-          require('dap').clear_breakpoints()
-        end,
-        desc = 'Clear all breakpoints',
-      },
-      {
-        '<leader>pl',
-        function()
-          require('dap').list_breakpoints()
-        end,
-        desc = 'List breakpoints',
-      },
-      {
-        '<leader><leader>d',
-        function()
-          if vim.fn.filereadable('.vscode/launch.json') == 1 then
-            require('dap.ext.vscode').load_launchjs()
-          end
-          require('dap').continue()
-        end,
-        desc = 'DAP Continue',
-      },
+      { '<c-p>', function() require('dap').toggle_breakpoint() end, desc = 'Toggle breakpoint' },
+      { '<leader>pc', function() require('dap').clear_breakpoints() end, desc = 'Clear all breakpoints' },
+      { '<leader>pl', function() require('dap').list_breakpoints() end, desc = 'List breakpoints' },
+      { '<leader><leader>d', function()
+        if vim.fn.filereadable('.vscode/launch.json') == 1 then
+          require('dap.ext.vscode').load_launchjs()
+        end
+        require('dap').continue()
+      end, desc = 'DAP Continue' },
     },
-    import = 'plugins.utility.debugger.languages',
     config = function(_, opts)
       local dap = require('dap')
 

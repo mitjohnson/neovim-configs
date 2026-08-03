@@ -37,6 +37,8 @@ require('lazy').setup({
     { import = 'plugins.lsp' },
     { import = 'plugins.utility.ai' },
     { import = 'plugins.utility.debugger' },
+    { import = 'plugins.utility.debugger.dap' },
+    { import = 'plugins.utility.debugger.neotest' },
     { import = 'plugins.utility.git' },
     { import = 'plugins.utility' },
   },
